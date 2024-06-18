@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mobis/screens/institution_details_screen/transaction_list_tile.dart';
 
 import '../../models/financial_institution.dart';
 import 'financial_transaction_graph.dart';
@@ -67,38 +68,8 @@ class InstitutionDetailsScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 20),
                     ...financialInstitution.transactions.take(6).map(
-                          (transaction) => Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 5),
-                                  child: Row(
-                                    children: [
-                                      const CircleAvatar(
-                                        radius: 10,
-                                        backgroundColor: Colors.green,
-                                      ),
-                                      const SizedBox(width: 10),
-                                      Text(
-                                        transaction.narration.toCapitalized(),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleSmall
-                                            ?.copyWith(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                      ),
-                                      const Spacer(),
-                                      Text(transaction.formattedDate),
-                                    ],
-                                  ),
-                                ),
-                                const Divider(),
-                              ],
-                            ),
+                          (transaction) => RecentTransactionTile(
+                            transaction: transaction,
                           ),
                         )
                   ],
@@ -125,14 +96,4 @@ class InstitutionDetailsScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-extension StringCasingExtension on String {
-  String toCapitalized() =>
-      length > 0 ? '${this[0].toUpperCase()}${substring(1).toLowerCase()}' : '';
-
-  String toTitleCase() => replaceAll(RegExp(' +'), ' ')
-      .split(' ')
-      .map((str) => str.toCapitalized())
-      .join(' ');
 }
