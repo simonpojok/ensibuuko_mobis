@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mobis/remote/financial_institution_repository.dart';
 import 'package:mobis/screens/dashboard_screen/dashboard_screen.dart';
 import 'package:mobis/screens/dashboard_screen/dashboard_screen_cubit.dart';
+import 'package:mobis/screens/institution_details_screen/institution_details_screen.dart';
 import 'package:mobis/screens/login_error_screen/login_error_screen.dart';
 import 'package:mobis/screens/login_screen/login_screen.dart';
 import 'package:mobis/screens/login_screen/login_screen_cubit.dart';
@@ -36,7 +37,12 @@ final GoRouter _router = GoRouter(
             ),
           );
         },
-        routes: const <RouteBase>[],
+        routes: <RouteBase>[
+          GoRoute(
+            path: InstitutionDetailsScreen.path,
+            builder: (context, state) => const InstitutionDetailsScreen(),
+          ),
+        ],
         redirect: (BuildContext context, GoRouterState state) {
           final phoneNumber = context.getUserPrefsRepository().getPhoneNumber();
 

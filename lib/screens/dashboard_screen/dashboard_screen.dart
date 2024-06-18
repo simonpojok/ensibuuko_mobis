@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:mobis/storage/user_shared_preference_repository.dart';
 import 'package:intl_phone_number_input/src/utils/phone_number/phone_number_util.dart';
 
 import '../../models/financial_institution.dart';
+import '../institution_details_screen/institution_details_screen.dart';
 import 'dashboard_screen_cubit.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -82,7 +84,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 (item) => OrganizationListItem(
                                   name: item.name,
                                   slogan: item.slogan,
-                                  onTap: () {},
+                                  onTap: () {
+                                    context.go(
+                                      '/${InstitutionDetailsScreen.path}',
+                                      extra: {
+                                        'data': financialInstitutions,
+                                      },
+                                    );
+                                  },
                                 ),
                               )
                               .toList(),
