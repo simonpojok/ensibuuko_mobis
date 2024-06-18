@@ -34,7 +34,7 @@ class FinancialInstitutionRepository {
       return Transaction(
         id: index + 1,
         dateTime: faker.date.dateTime(minYear: 2023, maxYear: 2024),
-        narration: faker.lorem.words(4).join(' '),
+        narration: faker.lorem.words(2).join(' '),
         amount: faker.randomGenerator.decimal(scale: 100, min: 100),
       );
     });

@@ -8,6 +8,7 @@ class Transaction extends Equatable {
   final double amount;
 
   String get month => DateFormat.MMMM().format(dateTime);
+  String get formattedDate => DateFormat.yMMMd().format(dateTime);
 
   const Transaction({
     required this.id,
