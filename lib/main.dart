@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mobis/remote/financial_institution_repository.dart';
 import 'package:mobis/screens/dashboard_screen/dashboard_screen.dart';
+import 'package:mobis/screens/dashboard_screen/dashboard_screen_cubit.dart';
 import 'package:mobis/screens/login_error_screen/login_error_screen.dart';
 import 'package:mobis/screens/login_screen/login_screen.dart';
 import 'package:mobis/screens/login_screen/login_screen_cubit.dart';
@@ -26,7 +28,13 @@ final GoRouter _router = GoRouter(
     GoRoute(
         path: DashboardScreen.path,
         builder: (BuildContext context, GoRouterState state) {
-          return const DashboardScreen();
+          return RepositoryProvider(
+            create: (context) => FinancialInstitutionRepository(),
+            child: BlocProvider(
+              create: (context) => DashboardScreenCubit(context.read()),
+              child: const DashboardScreen(),
+            ),
+          );
         },
         routes: const <RouteBase>[],
         redirect: (BuildContext context, GoRouterState state) {
