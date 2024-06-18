@@ -87,9 +87,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   onTap: () {
                                     context.go(
                                       '/${InstitutionDetailsScreen.path}',
-                                      extra: {
-                                        'data': financialInstitutions,
-                                      },
+                                      extra: item,
                                     );
                                   },
                                 ),

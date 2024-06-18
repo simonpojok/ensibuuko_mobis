@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mobis/models/financial_institution.dart';
 import 'package:mobis/remote/financial_institution_repository.dart';
 import 'package:mobis/screens/dashboard_screen/dashboard_screen.dart';
 import 'package:mobis/screens/dashboard_screen/dashboard_screen_cubit.dart';
@@ -40,7 +41,12 @@ final GoRouter _router = GoRouter(
         routes: <RouteBase>[
           GoRoute(
             path: InstitutionDetailsScreen.path,
-            builder: (context, state) => const InstitutionDetailsScreen(),
+            builder: (context, state) {
+              final institution = state.extra as FinancialInstitution;
+              return InstitutionDetailsScreen(
+                financialInstitution: institution,
+              );
+            },
           ),
         ],
         redirect: (BuildContext context, GoRouterState state) {

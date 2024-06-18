@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'bar_chart.dart';
+import '../../models/financial_institution.dart';
+import 'financial_transaction_graph.dart';
 
 class InstitutionDetailsScreen extends StatelessWidget {
   static const String path = 'institution-details-screen';
 
-  const InstitutionDetailsScreen({super.key});
+  const InstitutionDetailsScreen(
+      {super.key, required this.financialInstitution});
+
+  final FinancialInstitution financialInstitution;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +35,17 @@ class InstitutionDetailsScreen extends StatelessWidget {
                 width: double.infinity,
                 child: Column(
                   children: [
-                    BarChartSample1(),
+                    const SizedBox(height: 20),
+                    Text(
+                      financialInstitution.name,
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            fontSize: 20,
+                          ),
+                    ),
+                    const SizedBox(height: 20),
+                    FinancialTransactionsGraph(
+                      transactions: financialInstitution.transactions,
+                    ),
                   ],
                 ),
               ),
