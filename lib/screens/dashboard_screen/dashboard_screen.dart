@@ -20,8 +20,6 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  String _userPhoneNumber = '';
-
   @override
   void initState() {
     context.read<DashboardScreenCubit>().getFinancialInstitutions();
@@ -31,74 +29,76 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue.shade800,
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: ListView(
           children: [
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              color: Colors.blue.shade800,
+              child: Column(
+                children: [
+                  Text(
+                    'Welcome',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          fontSize: 36,
+                          color: Colors.white,
+                        ),
+                  ),
+                  const SizedBox(height: 40),
+                  Text(
+                    context
+                        .read<UserSharedPreferenceRepository>()
+                        .getPhoneNumber(),
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          color: Colors.white,
+                          fontSize: 40,
+                        ),
+                  ),
+                ],
+              ),
+            ),
             const SizedBox(height: 20),
-            Text(
-              'Welcome',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontSize: 36,
-                    color: Colors.white,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  Text(
+                    'Select the organization to proceed to\nlogin',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          fontSize: 18,
+                        ),
+                    textAlign: TextAlign.center,
                   ),
-            ),
-            const SizedBox(height: 40),
-            Text(
-              context.read<UserSharedPreferenceRepository>().getPhoneNumber(),
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: Colors.white,
-                    fontSize: 40,
+                  const SizedBox(height: 30),
+                  BlocBuilder(
+                    builder: (context, state) {
+                      List<FinancialInstitution> financialInstitutions =
+                          state is DashboardScreenSuccess
+                              ? state.financialInstitutions
+                              : [];
+
+                      // TODO: Use ListView incase the number of institution are more than 3
+
+                      return Column(
+                        children: financialInstitutions
+                            .map(
+                              (item) => OrganizationListItem(
+                                name: item.name,
+                                slogan: item.slogan,
+                                onTap: () {
+                                  context.go(
+                                    '/${InstitutionDetailsScreen.path}',
+                                    extra: item,
+                                  );
+                                },
+                              ),
+                            )
+                            .toList(),
+                      );
+                    },
+                    bloc: context.read<DashboardScreenCubit>(),
                   ),
-            ),
-            const SizedBox(height: 30),
-            Expanded(
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-                width: double.infinity,
-                color: Colors.white,
-                child: Column(
-                  children: [
-                    Text(
-                      'Select the organization to proceed to\nlogin',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            fontSize: 18,
-                          ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 30),
-                    BlocBuilder(
-                      builder: (context, state) {
-                        List<FinancialInstitution> financialInstitutions =
-                            state is DashboardScreenSuccess
-                                ? state.financialInstitutions
-                                : [];
-
-                        // TODO: Use ListView incase the number of institution are more than 3
-
-                        return Column(
-                          children: financialInstitutions
-                              .map(
-                                (item) => OrganizationListItem(
-                                  name: item.name,
-                                  slogan: item.slogan,
-                                  onTap: () {
-                                    context.go(
-                                      '/${InstitutionDetailsScreen.path}',
-                                      extra: item,
-                                    );
-                                  },
-                                ),
-                              )
-                              .toList(),
-                        );
-                      },
-                      bloc: context.read<DashboardScreenCubit>(),
-                    ),
-                  ],
-                ),
+                ],
               ),
             )
           ],
