@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+
+import '../login_screen/login_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   static const String path = '/welcome-screen';
@@ -31,7 +34,9 @@ class WelcomeScreen extends StatelessWidget {
                     height: 60,
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.go("$path/${LoginScreen.path}");
+                      },
                       child: const Text('Login'),
                     ),
                   ),

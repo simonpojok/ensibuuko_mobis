@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobis/screens/dashboard_screen/dashboard_screen.dart';
+import 'package:mobis/screens/login_error_screen/login_error_screen.dart';
+import 'package:mobis/screens/login_screen/login_screen.dart';
 import 'package:mobis/screens/welcome_screen/welcome_screen.dart';
 
 void main() {
@@ -24,7 +26,17 @@ final GoRouter _router = GoRouter(
       builder: (BuildContext context, GoRouterState state) {
         return const WelcomeScreen();
       },
-      routes: const <RouteBase>[],
+      routes: <RouteBase>[
+        GoRoute(
+            path: LoginScreen.path,
+            builder: (context, state) => const LoginScreen(),
+            routes: [
+              GoRoute(
+                path: LoginErrorScreen.path,
+                builder: (context, state) => const LoginErrorScreen(),
+              ),
+            ]),
+      ],
     ),
   ],
 );
