@@ -45,7 +45,8 @@ create table $_tableName (
       _columnTimestamp,
       _columnAmount,
       _columnNarration,
-      _columnInstitutionId
+      _columnInstitutionId,
+      _columnPhoneNumber
     ]);
 
     if (maps.isNotEmpty) {
@@ -56,13 +57,17 @@ create table $_tableName (
 
   Future<List<Transaction>> getTransactionForFinancialInstitutions(
       int id) async {
-    List<Map> maps = await db.query(_tableName, columns: [
-      _columnId,
-      _columnTimestamp,
-      _columnAmount,
-      _columnNarration,
-      _columnInstitutionId
-    ]);
+    List<Map> maps = await db.query(_tableName,
+        columns: [
+          _columnId,
+          _columnTimestamp,
+          _columnAmount,
+          _columnNarration,
+          _columnInstitutionId,
+          _columnPhoneNumber
+        ],
+        where: '$_columnInstitutionId = ?',
+        whereArgs: [id]);
     return maps
         .map((item) => Transaction.fromJson(item as Map<String, dynamic>))
         .toList();

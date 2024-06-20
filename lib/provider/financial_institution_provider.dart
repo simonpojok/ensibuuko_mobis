@@ -73,16 +73,20 @@ create table $_tableName (
         whereArgs: [userPhoneNumber]);
 
     List<Map> financialInstitution = await Future.wait(maps.map((item) async {
-      item['transactions'] = (await transactionProvider
+      final transactions = (await transactionProvider
               .getTransactionForFinancialInstitutions(item['id'] ?? 0))
           .map((item) => item.toJson());
-      return item;
+      return {...item, 'transactions': transactions.toList()};
     }));
 
-    return financialInstitution
-        .map((item) =>
-            FinancialInstitution.fromJson(item as Map<String, dynamic>))
-        .toList();
+    return financialInstitution.map((item) {
+      Map<String, dynamic> itemMap = {};
+      for (dynamic key in item.keys) {
+        itemMap[key.toString()] = item[key];
+      }
+
+      return FinancialInstitution.fromJson(itemMap);
+    }).toList();
   }
 
   Future<int> delete(int id) async {
