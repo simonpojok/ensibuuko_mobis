@@ -11,21 +11,24 @@ void main() {
       final transactions = [
         Transaction(
           id: 1,
-          dateTime: DateTime(2024, 5, 15),
+          timestamp: DateTime(2024, 5, 15).microsecondsSinceEpoch,
           narration: 'Transaction 1',
           amount: 100.0,
+          institutionId: 1,
         ),
         Transaction(
           id: 2,
-          dateTime: DateTime(2024, 6, 20),
+          timestamp: DateTime(2024, 6, 20).microsecondsSinceEpoch,
           narration: 'Transaction 2',
           amount: 200.0,
+          institutionId: 1,
         ),
         Transaction(
           id: 3,
-          dateTime: DateTime(2024, 5, 10),
+          timestamp: DateTime(2024, 5, 10).microsecondsSinceEpoch,
           narration: 'Transaction 3',
           amount: 150.0,
+          institutionId: 1,
         ),
       ];
 
@@ -49,15 +52,17 @@ void main() {
       final transactions = [
         Transaction(
           id: 1,
-          dateTime: DateTime(2024, 5, 15),
+          timestamp: DateTime(2024, 5, 15).microsecondsSinceEpoch,
           narration: 'Transaction 1',
           amount: 100.0,
+          institutionId: 1,
         ),
         Transaction(
           id: 2,
-          dateTime: DateTime(2024, 6, 20),
+          timestamp: DateTime(2024, 6, 20).microsecondsSinceEpoch,
           narration: 'Transaction 2',
           amount: 200.0,
+          institutionId: 1,
         ),
       ];
 
@@ -78,21 +83,24 @@ void main() {
       final transactions = [
         Transaction(
           id: 1,
-          dateTime: DateTime(2024, 5, 15),
+          timestamp: DateTime(2024, 5, 15).microsecondsSinceEpoch,
           narration: 'Transaction 1',
           amount: 100.0,
+          institutionId: 1,
         ),
         Transaction(
           id: 2,
-          dateTime: DateTime(2024, 6, 20),
+          timestamp: DateTime(2024, 6, 20).microsecondsSinceEpoch,
           narration: 'Transaction 2',
           amount: 200.0,
+          institutionId: 1,
         ),
         Transaction(
           id: 3,
-          dateTime: DateTime(2024, 5, 10),
+          timestamp: DateTime(2024, 5, 10).microsecondsSinceEpoch,
           narration: 'Transaction 3',
           amount: 150.0,
+          institutionId: 1,
         ),
       ];
 

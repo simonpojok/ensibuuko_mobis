@@ -11,31 +11,37 @@ class FinancialInstitutionRepository {
   Future<List<FinancialInstitution>> getSupportedFinancialInstitutions() async {
     return [
       FinancialInstitution(
+        id: 1,
         name: 'Rukiga SACCO',
         slogan: 'Save for a better future',
-        transactions: _generateTransactions(),
+        transactions: _generateTransactions(1),
       ),
       FinancialInstitution(
+        id: 2,
         name: 'KINA SACCO',
         slogan: "Kulw'okweterekera n'okwewola",
-        transactions: _generateTransactions(),
+        transactions: _generateTransactions(2),
       ),
       FinancialInstitution(
+        id: 3,
         name: 'Deed Microfinance',
         slogan: 'We care about your growth',
-        transactions: _generateTransactions(),
+        transactions: _generateTransactions(3),
       ),
     ];
   }
 
-  List<Transaction> _generateTransactions() {
+  List<Transaction> _generateTransactions(int id) {
     var faker = Faker();
     return List.generate(60, (index) {
       return Transaction(
         id: index + 1,
-        dateTime: faker.date.dateTime(minYear: 2023, maxYear: 2024),
+        timestamp: faker.date
+            .dateTime(minYear: 2023, maxYear: 2024)
+            .microsecondsSinceEpoch,
         narration: faker.lorem.words(2).join(' '),
         amount: faker.randomGenerator.decimal(scale: 100, min: 100),
+        institutionId: id,
       );
     });
   }

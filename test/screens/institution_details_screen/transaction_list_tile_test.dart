@@ -9,9 +9,10 @@ void main() {
         (widgetTestertester) async {
       final transaction = Transaction(
         id: 1,
-        dateTime: DateTime(2024, 5, 15),
+        timestamp: DateTime(2024, 5, 15).microsecondsSinceEpoch,
         narration: 'test narration',
         amount: 100.0,
+        institutionId: 1,
       );
 
       await widgetTestertester.pumpWidget(

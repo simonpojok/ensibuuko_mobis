@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mobis/authentication/authentication_repository.dart';
 import 'package:mobis/models/financial_institution.dart';
 import 'package:mobis/remote/financial_institution_repository.dart';
 import 'package:mobis/screens/dashboard_screen/dashboard_screen.dart';
@@ -13,7 +14,6 @@ import 'package:mobis/screens/signup_error_screen/signup_error_screen.dart';
 import 'package:mobis/screens/signup_screen/signup_screen.dart';
 import 'package:mobis/screens/signup_screen/signup_screen_cubit.dart';
 import 'package:mobis/screens/welcome_screen/welcome_screen.dart';
-import 'package:mobis/storage/authentication_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {

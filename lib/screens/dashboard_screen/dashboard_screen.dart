@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobis/storage/authentication_repository.dart';
 
+import '../../authentication/authentication_repository.dart';
 import '../../models/financial_institution.dart';
 import '../institution_details_screen/institution_details_screen.dart';
 import 'dashboard_screen_cubit.dart';

@@ -8,6 +8,7 @@ void main() {
       const institution = FinancialInstitution(
         name: 'Test Institution',
         slogan: 'Test Slogan',
+        id: 1,
       );
       expect(institution.props, equals(['Test Institution', 'Test Slogan']));
     });
@@ -18,28 +19,35 @@ void main() {
         slogan: 'Slogan A',
         transactions: [
           Transaction(
-              id: 1,
-              dateTime: DateTime.now(),
-              narration: 'Narration 1',
-              amount: 100),
+            id: 1,
+            timestamp: DateTime.now().microsecondsSinceEpoch,
+            narration: 'Narration 1',
+            amount: 100,
+            institutionId: 1,
+          ),
         ],
+        id: 1,
       );
 
       final institution2 = FinancialInstitution(
         name: 'Institution A',
         slogan: 'Slogan A',
+        id: 1,
         transactions: [
           Transaction(
-              id: 1,
-              dateTime: DateTime.now(),
-              narration: 'Narration 1',
-              amount: 100),
+            id: 1,
+            timestamp: DateTime.now().microsecondsSinceEpoch,
+            narration: 'Narration 1',
+            amount: 100,
+            institutionId: 1,
+          ),
         ],
       );
 
       const institution3 = FinancialInstitution(
         name: 'Institution B',
         slogan: 'Slogan B',
+        id: 1,
       );
 
       expect(institution1, equals(institution2));
@@ -50,6 +58,7 @@ void main() {
       const institution = FinancialInstitution(
         name: 'Institution X',
         slogan: 'Slogan X',
+        id: 1,
       );
       expect(institution.toString(), contains('Institution X'));
       expect(institution.toString(), contains('Slogan X'));
