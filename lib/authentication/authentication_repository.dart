@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const _phoneNumber = 'phone_number';
+const _knownUsers = 'known_users';
 
 class AuthenticationRepository {
   static const _usersPhoneNumbers = ['+256788123456', '+256700123456'];
@@ -11,7 +12,10 @@ class AuthenticationRepository {
   const AuthenticationRepository({required this.sharedPreferences});
 
   Future loginUserWithPhoneNumber(String phoneNumber) async {
-    if (!_usersPhoneNumbers.contains(phoneNumber)) {
+    if (![
+      ..._usersPhoneNumbers,
+      ...(sharedPreferences.getStringList(_knownUsers) ?? [])
+    ].contains(phoneNumber)) {
       throw Exception('Unknown Error');
     }
     await sharedPreferences.setString(_phoneNumber, phoneNumber);
@@ -22,9 +26,14 @@ class AuthenticationRepository {
   }
 
   Future signupUserWithPhoneNumber(String phoneNumber) async {
-    if (!_usersPhoneNumbers.contains(phoneNumber)) {
-      throw Exception('Unknown Error');
-    }
+    await sharedPreferences.setStringList(
+        _knownUsers,
+        {
+          ..._usersPhoneNumbers,
+          ...(sharedPreferences.getStringList(_knownUsers) ?? []),
+          phoneNumber
+        }.map((item) => item.toString()).toList());
+
     await sharedPreferences.setString(_phoneNumber, phoneNumber);
   }
 }

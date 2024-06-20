@@ -95,7 +95,8 @@ class _SignupScreenState extends State<SignupScreen> {
                       onSaved: (PhoneNumber number) {
                         context
                             .read<SignupScreenCubit>()
-                            .loginUserWithPhoneNumber(number.phoneNumber ?? '');
+                            .signupUserWithPhoneNumber(
+                                number.phoneNumber ?? '');
                       },
                     ),
                   ),

@@ -12,10 +12,10 @@ class SignupScreenCubit extends Cubit<SignupScreenState> {
 
   final AuthenticationRepository sharedPreferenceRepository;
 
-  void loginUserWithPhoneNumber(String phoneNumber) {
+  void signupUserWithPhoneNumber(String phoneNumber) {
     emit(SignupScreenLoading());
     sharedPreferenceRepository
-        .loginUserWithPhoneNumber(phoneNumber)
+        .signupUserWithPhoneNumber(phoneNumber)
         .then((response) => emit(SignupScreenSuccess()))
         .catchError((error, stack) {
       debugPrint(error.toString());
