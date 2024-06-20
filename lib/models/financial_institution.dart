@@ -8,6 +8,7 @@ part 'financial_institution.g.dart';
 class FinancialInstitution extends Equatable {
   final int id;
   final String name;
+  final String phoneNumber;
   final String slogan;
   final List<Transaction> transactions;
 
@@ -16,6 +17,7 @@ class FinancialInstitution extends Equatable {
 
   const FinancialInstitution({
     required this.id,
+    required this.phoneNumber,
     required this.name,
     required this.slogan,
     this.transactions = const [],

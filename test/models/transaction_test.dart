@@ -10,6 +10,7 @@ void main() {
         narration: 'Test Narration',
         amount: 100.0,
         institutionId: 1,
+        phoneNumber: '',
       );
       expect(transaction.props, equals([1]));
     });
@@ -21,6 +22,7 @@ void main() {
         narration: 'Narration 1',
         amount: 100.0,
         institutionId: 1,
+        phoneNumber: '',
       );
 
       final transaction2 = Transaction(
@@ -29,6 +31,7 @@ void main() {
         narration: 'Narration 1',
         amount: 100.0,
         institutionId: 1,
+        phoneNumber: '',
       );
 
       final transaction3 = Transaction(
@@ -37,6 +40,7 @@ void main() {
         narration: 'Narration 2',
         amount: 200.0,
         institutionId: 1,
+        phoneNumber: '',
       );
 
       expect(transaction1, equals(transaction2));
@@ -48,7 +52,7 @@ void main() {
         id: 1,
         timestamp: DateTime(2024, 5, 15).microsecondsSinceEpoch, // May 15, 2024
         narration: 'Test Narration',
-        amount: 100.0, institutionId: 1,
+        amount: 100.0, institutionId: 1, phoneNumber: '',
       );
       expect(transaction.month, equals('May'));
     });
@@ -58,6 +62,7 @@ void main() {
         id: 1,
         timestamp: DateTime(2024, 5, 15).microsecondsSinceEpoch, // May 15, 2024
         narration: 'Test Narration', amount: 100.0, institutionId: 1,
+        phoneNumber: '',
       );
       expect(transaction.formattedDate, equals('May 15, 2024'));
     });

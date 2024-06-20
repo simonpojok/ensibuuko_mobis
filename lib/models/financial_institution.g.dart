@@ -10,6 +10,7 @@ FinancialInstitution _$FinancialInstitutionFromJson(
         Map<String, dynamic> json) =>
     FinancialInstitution(
       id: (json['id'] as num).toInt(),
+      phoneNumber: json['phoneNumber'] as String,
       name: json['name'] as String,
       slogan: json['slogan'] as String,
       transactions: (json['transactions'] as List<dynamic>?)
@@ -23,6 +24,7 @@ Map<String, dynamic> _$FinancialInstitutionToJson(
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'phoneNumber': instance.phoneNumber,
       'slogan': instance.slogan,
       'transactions': instance.transactions,
     };

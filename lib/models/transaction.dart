@@ -8,6 +8,7 @@ part 'transaction.g.dart';
 class Transaction extends Equatable {
   final int id;
   final int institutionId;
+  final String phoneNumber;
   final int timestamp;
   final String narration;
   final double amount;
@@ -18,6 +19,7 @@ class Transaction extends Equatable {
   String get formattedDate => DateFormat.yMMMd().format(dateTime);
 
   const Transaction({
+    required this.phoneNumber,
     required this.id,
     required this.institutionId,
     required this.timestamp,

@@ -13,6 +13,7 @@ void main() {
         narration: 'test narration',
         amount: 100.0,
         institutionId: 1,
+        phoneNumber: '',
       );
 
       await widgetTestertester.pumpWidget(

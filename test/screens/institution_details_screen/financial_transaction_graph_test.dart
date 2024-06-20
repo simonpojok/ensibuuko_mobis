@@ -15,6 +15,7 @@ void main() {
           narration: 'Transaction 1',
           amount: 100.0,
           institutionId: 1,
+          phoneNumber: '',
         ),
         Transaction(
           id: 2,
@@ -22,6 +23,7 @@ void main() {
           narration: 'Transaction 2',
           amount: 200.0,
           institutionId: 1,
+          phoneNumber: '',
         ),
         Transaction(
           id: 3,
@@ -29,6 +31,7 @@ void main() {
           narration: 'Transaction 3',
           amount: 150.0,
           institutionId: 1,
+          phoneNumber: '',
         ),
       ];
 
@@ -56,6 +59,7 @@ void main() {
           narration: 'Transaction 1',
           amount: 100.0,
           institutionId: 1,
+          phoneNumber: '',
         ),
         Transaction(
           id: 2,
@@ -63,6 +67,7 @@ void main() {
           narration: 'Transaction 2',
           amount: 200.0,
           institutionId: 1,
+          phoneNumber: '',
         ),
       ];
 
@@ -87,6 +92,7 @@ void main() {
           narration: 'Transaction 1',
           amount: 100.0,
           institutionId: 1,
+          phoneNumber: '',
         ),
         Transaction(
           id: 2,
@@ -94,6 +100,7 @@ void main() {
           narration: 'Transaction 2',
           amount: 200.0,
           institutionId: 1,
+          phoneNumber: '',
         ),
         Transaction(
           id: 3,
@@ -101,6 +108,7 @@ void main() {
           narration: 'Transaction 3',
           amount: 150.0,
           institutionId: 1,
+          phoneNumber: '',
         ),
       ];
 

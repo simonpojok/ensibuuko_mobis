@@ -15,18 +15,21 @@ class FinancialInstitutionRepository {
         name: 'Rukiga SACCO',
         slogan: 'Save for a better future',
         transactions: _generateTransactions(1),
+        phoneNumber: '',
       ),
       FinancialInstitution(
         id: 2,
         name: 'KINA SACCO',
         slogan: "Kulw'okweterekera n'okwewola",
         transactions: _generateTransactions(2),
+        phoneNumber: '',
       ),
       FinancialInstitution(
         id: 3,
         name: 'Deed Microfinance',
         slogan: 'We care about your growth',
         transactions: _generateTransactions(3),
+        phoneNumber: '',
       ),
     ];
   }
@@ -42,6 +45,7 @@ class FinancialInstitutionRepository {
         narration: faker.lorem.words(2).join(' '),
         amount: faker.randomGenerator.decimal(scale: 100, min: 100),
         institutionId: id,
+        phoneNumber: '',
       );
     });
   }
