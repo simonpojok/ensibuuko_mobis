@@ -49,6 +49,7 @@ dependencies:
   http: ^1.2.1
   sqflite: ^2.3.3+1
   json_annotation: ^4.9.0
+  path: ^1.9.0
 
 dev_dependencies:
   flutter_test:
@@ -64,7 +65,6 @@ dev_dependencies:
   mockito: ^5.4.4
   bloc_test: ^9.1.7
   json_serializable: ^6.8.0
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

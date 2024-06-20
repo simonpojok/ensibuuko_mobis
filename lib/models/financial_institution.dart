@@ -27,4 +27,18 @@ class FinancialInstitution extends Equatable {
       _$FinancialInstitutionFromJson(json);
 
   Map<String, dynamic> toJson() => _$FinancialInstitutionToJson(this);
+
+  FinancialInstitution copyWith(
+          {int? id,
+          String? name,
+          String? phoneNumber,
+          String? slogan,
+          List<Transaction>? transactions}) =>
+      FinancialInstitution(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        phoneNumber: phoneNumber ?? this.phoneNumber,
+        slogan: slogan ?? this.slogan,
+        transactions: transactions ?? this.transactions,
+      );
 }

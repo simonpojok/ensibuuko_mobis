@@ -14,6 +14,7 @@ class Transaction extends Equatable {
   final double amount;
 
   DateTime get dateTime => DateTime.fromMicrosecondsSinceEpoch(timestamp);
+
   String get month => DateFormat.MMMM().format(dateTime);
 
   String get formattedDate => DateFormat.yMMMd().format(dateTime);
@@ -34,4 +35,21 @@ class Transaction extends Equatable {
       _$TransactionFromJson(json);
 
   Map<String, dynamic> toJson() => _$TransactionToJson(this);
+
+  Transaction copyWith({
+    int? id,
+    int? institutionId,
+    String? phoneNumber,
+    int? timestamp,
+    String? narration,
+    double? amount,
+  }) =>
+      Transaction(
+        id: id ?? this.id,
+        institutionId: institutionId ?? this.institutionId,
+        phoneNumber: phoneNumber ?? this.phoneNumber,
+        timestamp: timestamp ?? this.timestamp,
+        narration: narration ?? this.narration,
+        amount: amount ?? this.amount,
+      );
 }

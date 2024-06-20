@@ -1,8 +1,15 @@
+import 'dart:ui';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobis/authentication/authentication_repository.dart';
 import 'package:mobis/models/financial_institution.dart';
+import 'package:mobis/provider/database_provider.dart';
+import 'package:mobis/provider/financial_institution_provider.dart';
+import 'package:mobis/provider/transaction_provider.dart';
 import 'package:mobis/remote/financial_institution_repository.dart';
 import 'package:mobis/screens/dashboard_screen/dashboard_screen.dart';
 import 'package:mobis/screens/dashboard_screen/dashboard_screen_cubit.dart';
@@ -15,14 +22,41 @@ import 'package:mobis/screens/signup_screen/signup_screen.dart';
 import 'package:mobis/screens/signup_screen/signup_screen_cubit.dart';
 import 'package:mobis/screens/welcome_screen/welcome_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sqflite/sqflite.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  var rootToken = RootIsolateToken.instance!;
+  final items = await compute((rootToken) async {
+    BackgroundIsolateBinaryMessenger.ensureInitialized(rootToken);
+
+    return (await Future.wait(
+        [DatabaseProvider.initialDatabase(), SharedPreferences.getInstance()]));
+  }, rootToken);
+
   runApp(
-    RepositoryProvider(
-      create: (BuildContext context) =>
-          AuthenticationRepository(sharedPreferences: prefs),
+    MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(create: (context) => items.first as Database),
+        RepositoryProvider(
+          create: (context) => TransactionProvider(
+            db: context.read(),
+          ),
+        ),
+        RepositoryProvider(
+          create: (context) => FinancialInstitutionProvider(
+            transactionProvider: context.read(),
+            db: context.read(),
+          ),
+        ),
+        RepositoryProvider(
+          create: (BuildContext context) => AuthenticationRepository(
+            sharedPreferences: items.last as SharedPreferences,
+            financialInstitutionProvider: context.read(),
+            transactionProvider: context.read(),
+          ),
+        ),
+      ],
       child: const MyApp(),
     ),
   );
@@ -34,7 +68,10 @@ final GoRouter _router = GoRouter(
         path: DashboardScreen.path,
         builder: (BuildContext context, GoRouterState state) {
           return RepositoryProvider(
-            create: (context) => FinancialInstitutionRepository(),
+            create: (context) => FinancialInstitutionRepository(
+              financialInstitutionProvider: context.read(),
+              authenticationRepository: context.read(),
+            ),
             child: BlocProvider(
               create: (context) => DashboardScreenCubit(context.read()),
               child: const DashboardScreen(),

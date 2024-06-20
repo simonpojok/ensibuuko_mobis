@@ -70,9 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: InternationalPhoneNumberInput(
                       spaceBetweenSelectorAndTextField: 0,
                       formatInput: false,
-                      onInputChanged: (PhoneNumber number) {
-                        print(number.phoneNumber);
-                      },
+                      onInputChanged: (PhoneNumber number) {},
                       onInputValidated: (bool value) {},
                       selectorConfig: const SelectorConfig(
                         selectorType: PhoneInputSelectorType.BOTTOM_SHEET,

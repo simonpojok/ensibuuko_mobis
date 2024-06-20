@@ -1,5 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mobis/authentication/authentication_repository.dart';
+import 'package:mobis/provider/financial_institution_provider.dart';
+import 'package:mobis/provider/transaction_provider.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,8 +16,12 @@ void main() {
 
   setUp(() {
     mockSharedPreferences = MockSharedPreferences();
-    repository =
-        AuthenticationRepository(sharedPreferences: mockSharedPreferences);
+    repository = AuthenticationRepository(
+      sharedPreferences: mockSharedPreferences,
+      financialInstitutionProvider:
+          FinancialInstitutionProvider(TransactionProvider()),
+      transactionProvider: TransactionProvider(),
+    );
   });
 
   group('UserSharedPreferenceRepository', () {
