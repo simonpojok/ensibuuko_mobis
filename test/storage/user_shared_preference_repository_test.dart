@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mobis/storage/user_shared_preference_repository.dart';
+import 'package:mobis/storage/authentication_repository.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -10,12 +10,12 @@ class MockSharedPreferences extends Fake implements SharedPreferences {}
 
 void main() {
   late MockSharedPreferences mockSharedPreferences;
-  late UserSharedPreferenceRepository repository;
+  late AuthenticationRepository repository;
 
   setUp(() {
     mockSharedPreferences = MockSharedPreferences();
-    repository = UserSharedPreferenceRepository(
-        sharedPreferences: mockSharedPreferences);
+    repository =
+        AuthenticationRepository(sharedPreferences: mockSharedPreferences);
   });
 
   group('UserSharedPreferenceRepository', () {

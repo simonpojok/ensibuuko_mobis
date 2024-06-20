@@ -3,23 +3,23 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mobis/storage/authentication_repository.dart';
 
-part 'login_screen_state.dart';
+part 'signup_screen_state.dart';
 
-class LoginScreenCubit extends Cubit<LoginScreenState> {
-  LoginScreenCubit(this.sharedPreferenceRepository)
-      : super(LoginScreenInitial());
+class SignupScreenCubit extends Cubit<SignupScreenState> {
+  SignupScreenCubit(this.sharedPreferenceRepository)
+      : super(SignupScreenInitial());
 
   final AuthenticationRepository sharedPreferenceRepository;
 
   void loginUserWithPhoneNumber(String phoneNumber) {
-    emit(LoginScreenLoading());
+    emit(SignupScreenLoading());
     sharedPreferenceRepository
         .loginUserWithPhoneNumber(phoneNumber)
-        .then((response) => emit(LoginScreenSuccess()))
+        .then((response) => emit(SignupScreenSuccess()))
         .catchError((error, stack) {
       debugPrint(error.toString());
       debugPrintStack(stackTrace: stack);
-      emit(const LoginScreenError('Unknown Error'));
+      emit(const SignupScreenError('Unknown Error'));
     });
   }
 }

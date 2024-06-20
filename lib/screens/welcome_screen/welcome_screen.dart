@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../login_screen/login_screen.dart';
+import '../signup_screen/signup_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   static const String path = '/welcome-screen';
@@ -38,6 +39,22 @@ class WelcomeScreen extends StatelessWidget {
                         context.go("$path/${LoginScreen.path}");
                       },
                       child: const Text('Login'),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  SizedBox(
+                    height: 60,
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        context.go("$path/${SignupScreen.path}");
+                      },
+                      style: ButtonStyle(
+                        backgroundColor: WidgetStateProperty.all<Color>(
+                          Colors.grey,
+                        ), // Set your desired color here
+                      ),
+                      child: const Text('Create AccountS'),
                     ),
                   ),
                 ],

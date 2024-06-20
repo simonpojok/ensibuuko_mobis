@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobis/storage/user_shared_preference_repository.dart';
+import 'package:mobis/storage/authentication_repository.dart';
 
 import '../../models/financial_institution.dart';
 import '../institution_details_screen/institution_details_screen.dart';
@@ -43,9 +43,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                   const SizedBox(height: 40),
                   Text(
-                    context
-                        .read<UserSharedPreferenceRepository>()
-                        .getPhoneNumber(),
+                    context.read<AuthenticationRepository>().getPhoneNumber(),
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                           color: Colors.white,
                           fontSize: 40,

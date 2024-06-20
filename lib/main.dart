@@ -9,8 +9,11 @@ import 'package:mobis/screens/institution_details_screen/institution_details_scr
 import 'package:mobis/screens/login_error_screen/login_error_screen.dart';
 import 'package:mobis/screens/login_screen/login_screen.dart';
 import 'package:mobis/screens/login_screen/login_screen_cubit.dart';
+import 'package:mobis/screens/signup_error_screen/signup_error_screen.dart';
+import 'package:mobis/screens/signup_screen/signup_screen.dart';
+import 'package:mobis/screens/signup_screen/signup_screen_cubit.dart';
 import 'package:mobis/screens/welcome_screen/welcome_screen.dart';
-import 'package:mobis/storage/user_shared_preference_repository.dart';
+import 'package:mobis/storage/authentication_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -19,7 +22,7 @@ void main() async {
   runApp(
     RepositoryProvider(
       create: (BuildContext context) =>
-          UserSharedPreferenceRepository(sharedPreferences: prefs),
+          AuthenticationRepository(sharedPreferences: prefs),
       child: const MyApp(),
     ),
   );
@@ -50,7 +53,8 @@ final GoRouter _router = GoRouter(
           ),
         ],
         redirect: (BuildContext context, GoRouterState state) {
-          final phoneNumber = context.getUserPrefsRepository().getPhoneNumber();
+          final phoneNumber =
+              context.getAuthenticationRepository().getPhoneNumber();
 
           return phoneNumber.isNotEmpty ? null : WelcomeScreen.path;
         }),
@@ -65,7 +69,7 @@ final GoRouter _router = GoRouter(
           builder: (context, state) => BlocProvider(
             create: (BuildContext context) {
               return LoginScreenCubit(
-                context.getUserPrefsRepository(),
+                context.getAuthenticationRepository(),
               );
             },
             child: const LoginScreen(),
@@ -74,6 +78,23 @@ final GoRouter _router = GoRouter(
             GoRoute(
               path: LoginErrorScreen.path,
               builder: (context, state) => const LoginErrorScreen(),
+            ),
+          ],
+        ),
+        GoRoute(
+          path: SignupScreen.path,
+          builder: (context, state) => BlocProvider(
+            child: const SignupScreen(),
+            create: (BuildContext context) {
+              return SignupScreenCubit(
+                context.getAuthenticationRepository(),
+              );
+            },
+          ),
+          routes: [
+            GoRoute(
+              path: SignupErrorScreen.path,
+              builder: (context, state) => const SignupErrorScreen(),
             ),
           ],
         ),
